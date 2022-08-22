@@ -1,3 +1,4 @@
+
 import express from 'express'
 import { 
     postImg, 
@@ -7,7 +8,6 @@ import {
     getPostById,
     updatePost,
     deletePost } from '../../lib/postUtilities.js'
-
 const postsRouter = express.Router()
 
 postsRouter.post("/", postPost)
@@ -23,3 +23,4 @@ postsRouter.put("/:postId", updatePost)
 postsRouter.delete("/:postId", deletePost)
 
 export default postsRouter
+

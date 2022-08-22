@@ -1,3 +1,4 @@
+
 import PostModel from "../apis/posts/model.js"
 import multer from "multer"
 import { v2 as cloudinary } from "cloudinary"
@@ -14,6 +15,7 @@ export const cloudinaryUploader = multer({
   limits: { fileSize: 1024 * 1024 },
 }).single("post")
 
+
 export const postPost = async (req, res, next) => {
   try {
     const newPost = new PostModel(req.body)
@@ -25,6 +27,7 @@ export const postPost = async (req, res, next) => {
     next(error)
   }
 }
+
 
 export const postImg = async (req, res, next) => {
   try {
@@ -110,3 +113,4 @@ export const deletePost = async (req, res, next) => {
     next(error)
   }
 }
+
