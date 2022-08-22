@@ -1,0 +1,25 @@
+{
+  "name": "linked_in_be",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type":"module",
+
+
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon -r dotenv/config -e js ./src/server.js",
+    "start": "node ./src/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SimonKovacsp22/Linked_in_BE.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SimonKovacsp22/Linked_in_BE/issues"
+  },
+  "homepage": "https://github.com/SimonKovacsp22/Linked_in_BE#readme"
+}
