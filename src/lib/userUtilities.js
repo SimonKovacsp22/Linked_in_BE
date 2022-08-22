@@ -5,9 +5,7 @@ import createHttpError from "http-errors"
 export const postUser = async (req, res, next) => {
   try {
     const newUser = new UserModel(req.body)
-
     const { _id } = await newUser.save()
-
     res.status(201).send({ id: _id })
   } catch (error) {
     next(error)
@@ -16,8 +14,6 @@ export const postUser = async (req, res, next) => {
 export const getAllUsers = async (req, res, next) => {
   try {
     const users = await UserModel.find()
-    console.log(users)
-
     res.send(users)
   } catch (error) {
     next(error)

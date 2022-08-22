@@ -6,12 +6,8 @@ import fs from "fs-extra"
 const { readJSON, writeJSON, writeFile, createReadStream, createWriteStream } =
   fs
 
-// const dataFolderPath = join(
-//   dirname(fileURLToPath(import.meta.url)),
-//   process.env.MONGO_CON_URL
-// )
-const dataFolderPath = process.env.MONGO_CON_URL
+const dataFolderPath = join(dirname(fileURLToPath(import.meta.url)), "../data")
 
 const usersJSONPath = join(dataFolderPath, "users.json")
 
-export const getUsers = () => readJSON(`${process.env.MONGO_CON_URL}users.json`)
+export const getUsers = () => readJSON(usersJSONPath)

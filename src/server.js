@@ -18,24 +18,24 @@ const server = express()
 
 const whitelist = ["http://localhost:3000"]
 
-// server.use(
-//   cors({
-//     origin: (origin, corsNext) => {
-//       console.log("ORIGIN:", origin)
+server.use(
+  cors({
+    origin: (origin, corsNext) => {
+      console.log("ORIGIN:", origin)
 
-//       if (!origin || whitelist.indexOf(origin) !== -1) {
-//         corsNext(null, true)
-//       } else {
-//         corsNext(
-//           createHttpError(
-//             400,
-//             "Cors Error! Your origin " + origin + "is not in the list"
-//           )
-//         )
-//       }
-//     },
-//   })
-// )
+      if (!origin || whitelist.indexOf(origin) !== -1) {
+        corsNext(null, true)
+      } else {
+        corsNext(
+          createHttpError(
+            400,
+            "Cors Error! Your origin " + origin + "is not in the list"
+          )
+        )
+      }
+    },
+  })
+)
 //server.use(cors())
 server.use(express.json())
 

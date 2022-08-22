@@ -5,11 +5,10 @@ import multer from "multer"
 
 import { v2 as cloudinary } from "cloudinary"
 import { CloudinaryStorage } from "multer-storage-cloudinary"
-// import { pipeline } from "stream"
-// import { getPDFReadableStream } from "../../lib/pdf-tools.js"
-// import UserModel from "../apis/users/models.js"
-//import { getAllUsers } from "../../lib/userUtilities.js"
-// import { getUsers } from "../../lib/fs.tools.js"
+
+import { pipeline } from "stream"
+import { getPDFReadableStream } from "../../lib/pdf-tools.js"
+import UserModel from "../users/models.js"
 
 const cloudinaryUploader = multer({
   storage: new CloudinaryStorage({
@@ -37,22 +36,22 @@ filesRouter.post("/cloudinary", cloudinaryUploader, async (req, res, next) => {
     next(error)
   }
 })
-// filesRouter.get("/PDF", async (req, res, next) => {
-//   try {
-//     // SOURCE ( PDF Readable Stream) --> DESTINATION (http response)
-//     const data = await getAllUsers()
 
-//     res.setHeader("Content-Disposition", "attachment; filename=products.pdf")
-//     // const source = getPDFReadableStream(products)
-//     //const source = getPDFReadableStream(data[0].products[0])
-//     //const source = getPDFReadableStream(data)
-//     const destination = res
-//     pipeline(source, destination, (err) => {
-//       if (err) console.log(err)
-//     })
-//   } catch (error) {
-//     next(error)
-//   }
-// })
+//http://localhost:3001/files/PDF
+filesRouter.get("/PDF", async (req, res, next) => {
+  try {
+    const users = await UserModel.find()
+    res.setHeader("Content-Disposition", "attachment; filename=users.pdf")
+
+    const source = getPDFReadableStream(users[0])
+    const destination = res
+    pipeline(source, destination, (err) => {
+      if (err) console.log(err)
+    })
+    //res.send(users)
+  } catch (error) {
+    next(error)
+  }
+})
 
 export default filesRouter

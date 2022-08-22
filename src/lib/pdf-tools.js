@@ -31,25 +31,25 @@ export const getPDFReadableStream = (products) => {
   const docDefinition = {
     content: [
       {
-        text: `${products.name}`,
+        text: `${products.name} ${products.surname}`,
         style: "header",
       },
       {
-        text: `${products.brand}`,
+        text: `${products.email}`,
         style: "header",
       },
-      {
-        text: `${products.category}`,
-        style: "header",
-      },
-      {
-        text: `${products.price}`,
-        style: "subheader",
-      },
-      {
-        text: `${products.description}`,
-        style: "small",
-      },
+      // {
+      //   text: `${products.category}`,
+      //   style: "header",
+      // },
+      // {
+      //   text: `${products.price}`,
+      //   style: "subheader",
+      // },
+      // {
+      //   text: `${products.description}`,
+      //   style: "small",
+      // },
       {
         //image: fs.readFileSync(products.imageUrl, "base64"),
         //image: products.imageUrl,
