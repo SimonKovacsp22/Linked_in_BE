@@ -1,5 +1,6 @@
 /** @format */
 import UserModel from "../apis/users/models.js"
+import createHttpError from "http-errors"
 
 export const postUser = async (req, res, next) => {
   try {
@@ -15,6 +16,8 @@ export const postUser = async (req, res, next) => {
 export const getAllUsers = async (req, res, next) => {
   try {
     const users = await UserModel.find()
+    console.log(users)
+
     res.send(users)
   } catch (error) {
     next(error)
@@ -35,10 +38,9 @@ export const getSingleUsers = async (req, res, next) => {
 export const updateUser = async (req, res, next) => {
   try {
     const updatedUser = await UserModel.findByIdAndUpdate(
-      req.params.userId, // WHO you want to modify
-      req.body, // HOW you want to modify
-      { new: true, runValidators: true } // OPTIONS. By default findByIdAndUpdate returns the record pre-modification. If you want to get back the newly update record you should use the option new: true
-      // By default validation is off here --> runValidators: true
+      req.params.userId,
+      req.body,
+      { new: true, runValidators: true }
     )
     if (updatedUser) {
       res.send(updatedUser)

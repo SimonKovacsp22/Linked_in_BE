@@ -6,6 +6,7 @@ import mongoose from "mongoose"
 import cors from "cors"
 import postsRouter from "./apis/posts/index.js"
 import usersRouter from "./apis/users/index.js"
+import filesRouter from "./apis/files/index.js"
 import {
   badRequestHandler,
   genericErrorHandler,
@@ -35,11 +36,12 @@ const whitelist = ["http://localhost:3000"]
 //     },
 //   })
 // )
-server.use(cors())
+//server.use(cors())
 server.use(express.json())
 
 server.use("/posts", postsRouter)
 server.use("/users", usersRouter)
+server.use("/files", filesRouter)
 
 // ********************************* ERROR HANDLERS **************************************
 server.use(badRequestHandler)
