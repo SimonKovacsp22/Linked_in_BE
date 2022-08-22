@@ -32,7 +32,7 @@ server.use(
 
 server.use(express.json());
 
-server.use("/posts", postsRouter)
+server.use("/api/posts", postsRouter)
 
 mongoose.connect(process.env.MONGO_CON_URL)
 
