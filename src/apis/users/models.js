@@ -14,6 +14,16 @@ const usersSchema = new Schema(
     area: { type: String, required: true },
     image: { type: String, required: true },
     username: { type: String, required: true },
+    experiences : [{
+      role:String,
+      company:String,
+      description:String,
+      startDate:String,
+      endDate:String,
+      area:String,
+      imageUrl:String,
+
+    }]
     //dateOfBirth: { type: Date, required: true },
   },
   {
