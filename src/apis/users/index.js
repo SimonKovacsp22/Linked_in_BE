@@ -2,7 +2,7 @@
 
 import express from "express"
 
-import { deleteExp, editExp, getAllExps, getExp, postExp } from "../../lib/expUtilities.js"
+import { deleteExp, editExp, getAllExps, getExp, postExp, uploadExpPic } from "../../lib/expUtilities.js"
 
 
 import {
@@ -12,6 +12,7 @@ import {
   postUser,
   updateUser,
 } from "../../lib/userUtilities.js"
+import { cloudinaryUploader } from "../files/index.js"
 
 const usersRouter = express.Router()
 
@@ -29,6 +30,8 @@ usersRouter.delete("/:userId", deleteUser)
 /* Experiences */
 
 usersRouter.post('/:userId/experiences' , postExp)
+
+usersRouter.post('/:userId/experiences/:expId', cloudinaryUploader , uploadExpPic)
 
 usersRouter.get("/:userId/experiences" , getAllExps)
 

@@ -86,3 +86,26 @@ export const deleteExp = async(req,res,next) => {
         next(error)
     }
 }
+
+export const uploadExpPic = async(req,res,next) => {
+    try {
+        const user = await UserModel.findById(req.params.userId)
+    
+        if (!user) {
+          return next(
+            createHttpError(404, `User with id: ${req.params.postId} not found`)
+          )  
+        }
+        const index = user.experiences.findIndex(aExp => aExp._id.toString() === req.params.expId)
+        if(index !== -1){
+            user.experiences[index].imageUrl = req.file.path
+            user.save()
+            res.send(user.exp)
+        }else{
+            next(createHttpError(404,`the experience with this id ${req.params.expId} doesn't exist`))
+        }
+    
+      } catch (error) {
+        next(error)
+      }
+}
