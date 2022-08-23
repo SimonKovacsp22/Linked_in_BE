@@ -10,7 +10,13 @@ import { pipeline } from "stream"
 import { getPDFReadableStream } from "../../lib/pdf-tools.js"
 import UserModel from "../users/models.js"
 
-const cloudinaryUploader = multer({
+import json2csv  from "json2csv"
+import fs from 'fs-extra'
+import { createReadStream } from "fs"
+import path from "path"
+
+
+export const cloudinaryUploader = multer({
   storage: new CloudinaryStorage({
     cloudinary, // this searches in your process.env for something called CLOUDINARY_URL which contains your cloudinary api key and secret
     params: {
@@ -52,6 +58,28 @@ filesRouter.get("/PDF", async (req, res, next) => {
   } catch (error) {
     next(error)
   }
+})
+
+filesRouter.get("/CSV/:userId", async (req,res,next) =>{
+  try {
+      res.setHeader("Content-Disposition" , "attachments; filename=experiences.csv") 
+      const user = await UserModel.findById(req.params.userId).lean()
+      console.log(user);
+      const exp = user.experiences
+      exp.createdAt = user.createdAt
+      const sourse = exp
+      const destination = res
+      const data = await json2csv.parseAsync(exp,{fields : ["_id","role","company","description","startDate","endDate","area"," imageUrl"]})
+      fs.writeFileSync('test.csv' , data)
+      res.sendFile(path.join(process.cwd(), "test.csv"))
+      // const transform = new json2csv.Transform({fields: ["_id","createdAt"]})
+      // pipeline(sourse,transform,destination,err => {
+      //     if(err) console.log(err);
+      // })
+  } catch (error) {
+      next(error)
+  }
+
 })
 
 export default filesRouter
