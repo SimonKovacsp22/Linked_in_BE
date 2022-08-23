@@ -46,9 +46,9 @@ server.use(
 //server.use(cors())
 server.use(express.json())
 
-server.use("/posts", postsRouter)
-server.use("/users", usersRouter)
-server.use("/files", filesRouter)
+server.use("/api/posts", postsRouter)
+server.use("/api/users", usersRouter)
+server.use("/api/files", filesRouter)
 
 // ********************************* ERROR HANDLERS **************************************
 server.use(badRequestHandler)

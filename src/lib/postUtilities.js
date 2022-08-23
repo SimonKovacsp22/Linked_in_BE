@@ -56,13 +56,14 @@ export const getPosts = async (req, res, next) => {
 
     res.send(posts)
   } catch (error) {
+    console.log(error)
     next(error)
   }
 }
 
 export const getPostById = async (req, res, next) => {
   try {
-    const post = await PostModel.findById(req.params.postId)
+    const post = await PostModel.findById(req.params.postId).populate("user")
 
     if (!post) {
       return next(
