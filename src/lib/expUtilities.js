@@ -1,7 +1,6 @@
 import expModel from "../apis/experiences/model.js"
 import UserModel from "../apis/users/models.js"
 import createHttpError from "http-errors"
-import { PromiseProvider } from "mongoose"
 
 export const postExp = async(req,res,next) => {
     try {

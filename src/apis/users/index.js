@@ -28,14 +28,14 @@ usersRouter.delete("/:userId", deleteUser)
 
 /* Experiences */
 
-usersRouter.post('/userId/experiences' , postExp)
+usersRouter.post('/:userId/experiences' , postExp)
 
-usersRouter.get("/userId/experiences" , getAllExps)
+usersRouter.get("/:userId/experiences" , getAllExps)
 
 usersRouter.get("/:userId/experiences/:expId" , getExp)
 
 usersRouter.put("/:userId/experiences/:expId" , editExp)
 
-usersRouter.delete("/userId/experiences/:expId" , deleteExp)
+usersRouter.delete("/:userId/experiences/:expId" , deleteExp)
 
 export default usersRouter
