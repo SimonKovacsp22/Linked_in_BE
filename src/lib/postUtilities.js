@@ -54,7 +54,7 @@ export const getPosts = async (req, res, next) => {
   try {
     const posts = await PostModel.find().populate("user")
 
-    res.send(posts)
+    res.send(posts.reverse())
   } catch (error) {
 
     next(error)
