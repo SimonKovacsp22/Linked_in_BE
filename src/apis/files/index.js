@@ -26,11 +26,6 @@ const filesRouter = express.Router()
 filesRouter.post("/cloudinary", cloudinaryUploader, async (req, res, next) => {
   try {
     console.log("REQ FILE: ", req.file)
-
-    // 1. upload on Cloudinary happens automatically
-    // 2. req.file contains the path which is the url where to find that picture
-    // 3. update the resource by adding the path to it
-    //res.send("UPLOADED")
     res.status(201).send({ url: req.file.path })
   } catch (error) {
     next(error)
