@@ -50,6 +50,7 @@ server.use("/api/posts", postsRouter)
 server.use("/api/users", usersRouter)
 server.use("/api/files", filesRouter)
 
+
 // ********************************* ERROR HANDLERS **************************************
 server.use(badRequestHandler)
 server.use(notFoundHandler)
