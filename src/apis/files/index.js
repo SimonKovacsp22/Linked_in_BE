@@ -83,7 +83,7 @@ filesRouter.get("/CSV/:userId", async (req, res, next) => {
         " imageUrl",
       ],
     })
-    fs.writeFileSync("test.csv", data)
+    fs.writeFileSync("Experiences.csv", data)
     res.sendFile(path.join(process.cwd(), "test.csv"))
     // const transform = new json2csv.Transform({fields: ["_id","createdAt"]})
     // pipeline(sourse,transform,destination,err => {
