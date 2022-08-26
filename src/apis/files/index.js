@@ -42,13 +42,13 @@ filesRouter.post("/cloudinary", cloudinaryUploader, async (req, res, next) => {
   }
 })
 
-//http://localhost:3001/files/PDF
-filesRouter.get("/PDF", async (req, res, next) => {
+// http://localhost:3003/api/files/PDF/:userId
+filesRouter.get("/PDF/:userId", async (req, res, next) => {
   try {
-    const users = await UserModel.find()
+    const users = await UserModel.findById(req.params.userId)
     res.setHeader("Content-Disposition", "attachment; filename=users.pdf")
 
-    const source = getPDFReadableStream(users[0])
+    const source = getPDFReadableStream(users)
     const destination = res
     pipeline(source, destination, (err) => {
       if (err) console.log(err)
