@@ -4,10 +4,16 @@ import PdfPrinter from "pdfmake"
 import imageToBase64 from "image-to-base64"
 import fs from "fs-extra"
 
-export const getPDFReadableStream = (products) => {
-  //console.log(products)
+// var externalDataRetrievedFromServer = [
+//   { name: "Bartek", age: 34 },
+//   { name: "John", age: 27 },
+//   { name: "Elizabeth", age: 30 },
+// ]
+
+export const getPDFReadableStream = (user) => {
+  console.log(user.experiences)
   const imageToPdf = async () => {
-    const response = await imageToBase64(products.imageUrl) // Image URL
+    const response = await imageToBase64(user.image) // Image URL
       .then((response) => {
         //console.log(response)
         return response
@@ -17,8 +23,8 @@ export const getPDFReadableStream = (products) => {
         return response
       })
   }
-  //   const imageUrl = await imageToPdf()
-  //   console.log(imageUrl)
+  // const imageUrl = imageToPdf()
+  // console.log(imageUrl)
   const fonts = {
     Roboto: {
       normal: "Helvetica",
@@ -27,35 +33,81 @@ export const getPDFReadableStream = (products) => {
   }
 
   const printer = new PdfPrinter(fonts)
+  // const tableContent = [
+  //   // ["ROLE", "COMPANY", "AREA", "STARTDATE", "ENDDATE", "DESCRIPTION"],
+  //   ["ROLE", "COMPANY", "AREA"],
+  //   user.experiences.map((experience) => {
+  //     return [
+  //       experience.title,
+  //       experience.company,
+  //       experience.area,
+  //       // experience.startDate,
+  //       // experience.endDate,
+  //       // experience.description,
+  //     ]
+  //   }),
+  // ]
+  // function buildTableBody(data, columns) {
+  //   var body = []
+  //   body.push(columns)
+  //   data.forEach(function (row) {
+  //     var dataRow = []
+  //     columns.forEach(function (column) {
+  //       dataRow.push(row[column].toString())
+  //     })
+  //     body.push(dataRow)
+  //   })
+  //   return body
+  // }
+
+  // function table(data, columns) {
+  //   return {
+  //     table: {
+  //       headerRows: 1,
+  //       body: buildTableBody(data, columns),
+  //     },
+  //   }
+  // }
 
   const docDefinition = {
     content: [
       {
-        text: `${products.name} ${products.surname}`,
+        text: `${user.name} ${user.surname}`,
         style: "header",
       },
       {
-        text: `${products.email}`,
-        style: "header",
+        text: `${user.email}`,
+        style: "subheader",
       },
-      // {
-      //   text: `${products.category}`,
-      //   style: "header",
-      // },
-      // {
-      //   text: `${products.price}`,
-      //   style: "subheader",
-      // },
-      // {
-      //   text: `${products.description}`,
-      //   style: "small",
-      // },
       {
-        //image: fs.readFileSync(products.imageUrl, "base64"),
-        //image: products.imageUrl,
-        //image: `data:image/jpeg;base64,${imageToPdf}`,
-        //image: `${products.imageUrl}`,
+        text: `${user.bio}`,
+        style: "subheader",
       },
+      {
+        text: `${user.title}`,
+        style: "subheader",
+      },
+      {
+        text: `${user.area}`,
+        style: "subheader",
+      },
+      {
+        text: `${user.username}`,
+        style: "subheader",
+      },
+
+      //   // {
+      //   //   //image: fs.readFileSync(products.imageUrl, "base64"),
+      //   //   //image: products.imageUrl,
+      //   //   //image: `data:image/jpeg;base64,${imageToPdf}`,
+      //   //   //image: `${products.imageUrl}`,
+      //   // },
+      //   {
+      //     style: "tableExample",
+      //     table: {
+      //       body: tableContent,
+      //     },
+      //   },
     ],
 
     styles: {
