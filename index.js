@@ -1,42 +1,43 @@
 /** @format */
-
+import * as dotenv from "dotenv"
 import express from "express"
 import listEndpoints from "express-list-endpoints"
 import mongoose from "mongoose"
 import cors from "cors"
-import postsRouter from "./apis/posts/index.js"
-import usersRouter from "./apis/users/index.js"
-import filesRouter from "./apis/files/index.js"
+import postsRouter from "./src/apis/posts/index.js"
+import usersRouter from "./src/apis/users/index.js"
+import filesRouter from "./src/apis/files/index.js"
 import {
   badRequestHandler,
   genericErrorHandler,
   notFoundHandler,
-} from "./errorHandlers.js"
+} from "./src/errorHandlers.js"
 
+dotenv.config()
 const port = process.env.PORT
 const server = express()
 
-const whitelist = ["http://localhost:3000"]
+// const whitelist = ["http://localhost:3000"]
 
-server.use(
-  cors({
-    origin: (origin, corsNext) => {
-      console.log("ORIGIN:", origin)
+// server.use(
+//   cors({
+//     origin: (origin, corsNext) => {
+//       console.log("ORIGIN:", origin)
 
-      if (!origin || whitelist.indexOf(origin) !== -1) {
-        corsNext(null, true)
-      } else {
-        corsNext(
-          createHttpError(
-            400,
-            "Cors Error! Your origin " + origin + "is not in the list"
-          )
-        )
-      }
-    },
-  })
-)
-//server.use(cors())
+//       if (!origin || whitelist.indexOf(origin) !== -1) {
+//         corsNext(null, true)
+//       } else {
+//         corsNext(
+//           createHttpError(
+//             400,
+//             "Cors Error! Your origin " + origin + "is not in the list"
+//           )
+//         )
+//       }
+//     },
+//   })
+// )
+server.use(cors())
 server.use(express.json())
 
 server.use("/api/posts", postsRouter)
